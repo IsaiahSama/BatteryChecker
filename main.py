@@ -1,6 +1,6 @@
 from win10toast import ToastNotifier
 from psutil import sensors_battery
-
+from time import sleep
 class Main:
     
     def __init__(self) -> None:
@@ -11,10 +11,12 @@ class Main:
         while battery.power_plugged:
             if battery.percent >= 80:
                 self.notif.show_toast(title="Battery Checker", msg=f"You're battery is at {battery.percent}%. I recommend unplugging now", duration=30)
-        
+                sleep(30)
+
         while not battery.power_plugged:
             if battery.percent <= 40:
                 self.notif.show_toast("Battery Checker", f"Your battery is at {battery.percent}%. I recommend charging now", duration=30)
+                sleep(30)
 
 
 main = Main()
